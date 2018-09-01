@@ -1,5 +1,7 @@
 package containersgo
 
+import "sync"
+
 type Set struct {
 	items map[interface{}]struct{}
 
@@ -33,7 +35,7 @@ func (set *Set) Clear() {
 
 	set.items = map[interface{}]struct{}{}
 
-	st.lock.Unlock()
+	set.lock.Unlock()
 }
 
 func (set *Set) Empty() bool {
