@@ -3,8 +3,8 @@ package containersgo
 import (
 	"container/list"
 	"fmt"
-	"testing"
 	"sync"
+	"testing"
 )
 
 func TestListBasic(t *testing.T) {
@@ -27,22 +27,22 @@ func TestListBasic(t *testing.T) {
 	// 4
 }
 
-func TestListBasicUnSafe(t *testing.T){
+func TestListBasicUnSafe(t *testing.T) {
 	// Create a new list and put some numbers in it concurrently
 	l := list.New()
 	e4 := l.PushBack(4)
 	e1 := l.PushFront(1)
 	var wg sync.WaitGroup
 	wg.Add(3)
-	go func(){
+	go func() {
 		l.InsertBefore(3, e4)
 		wg.Done()
 	}()
-	go func(){
+	go func() {
 		l.InsertBefore(5, e4)
 		wg.Done()
 	}()
-	go func(){
+	go func() {
 		l.InsertAfter(2, e1)
 		wg.Done()
 	}()
